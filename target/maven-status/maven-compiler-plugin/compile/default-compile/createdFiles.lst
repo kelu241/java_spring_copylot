@@ -1,0 +1,7 @@
+com/example/springcopylot/controller/ProjetoController.class
+com/example/springcopylot/config/ServiceConfig.class
+com/example/springcopylot/model/Projeto.class
+com/example/springcopylot/service/IProjetoService.class
+com/example/springcopylot/repository/ProjetoRepository.class
+com/example/springcopylot/SpringCopylotApplication.class
+com/example/springcopylot/service/ProjetoService.class
