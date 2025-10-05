@@ -1,10 +1,24 @@
 package com.example.springcopylot.repository;
 
-import com.example.springcopylot.model.Projeto;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import com.example.springcopylot.model.Projeto;
+
+
+
 @Repository
-public interface ProjetoRepository extends JpaRepository<Projeto, Long> {
-    // Métodos customizados podem ser adicionados aqui
+public class ProjetoRepository extends GenericRepository<Projeto> implements IProjetoRepository {
+
+    @Autowired
+    private ProjetoJpaRepository projetoJpaRepository;
+
+    @Override
+    protected JpaRepository<Projeto, Long> getRepository() {
+        return projetoJpaRepository;
+    }
+
 }
+

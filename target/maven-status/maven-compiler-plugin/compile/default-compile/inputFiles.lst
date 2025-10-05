@@ -1,7 +1,10 @@
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/SpringCopylotApplication.java
-/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/service/IProjetoService.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/IProjetoRepository.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/controller/ProjetoController.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/GenericRepository.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/ProjetoJpaRepository.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/model/Projeto.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/service/ProjetoService.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/config/ServiceConfig.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/IGerericRepository.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/ProjetoRepository.java

@@ -1,41 +1,40 @@
 package com.example.springcopylot.controller;
 
 import com.example.springcopylot.model.Projeto;
-import com.example.springcopylot.service.ProjetoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.concurrent.CompletableFuture;
 
 @RestController
 @RequestMapping("/projetos")
 public class ProjetoController {
     @Autowired
-    private com.example.springcopylot.service.IProjetoService projetoService;
+    private com.example.springcopylot.repository.IProjetoRepository projetoRepository;
 
     @GetMapping
-    public List<Projeto> getAllProjetos() {
-        return projetoService.getAllProjetos();
+    public CompletableFuture<Iterable<Projeto>> getAllProjetosAsync() {
+        return projetoRepository.findAllAsync();
     }
 
     @GetMapping("/{id}")
-    public Optional<Projeto> getProjetoById(@PathVariable Long id) {
-        return projetoService.getProjetoById(id);
+    public CompletableFuture<Projeto> getProjetoByIdAsync(@PathVariable Long id) {
+        return projetoRepository.findByIdAsync(id);
     }
 
     @PostMapping
-    public Projeto addProjeto(@RequestBody Projeto projeto) {
-        return projetoService.addProjeto(projeto);
+    public CompletableFuture<Projeto> addProjetoAsync(@RequestBody Projeto projeto) {
+        return projetoRepository.saveAsync(projeto);
     }
 
     @PutMapping("/{id}")
-    public Projeto updateProjeto(@PathVariable Long id, @RequestBody Projeto projeto) {
-        return projetoService.updateProjeto(id, projeto);
+    public CompletableFuture<Projeto> updateProjetoAsync(@PathVariable Long id, @RequestBody Projeto projeto) {
+        projeto.setId(id);
+        return projetoRepository.saveAsync(projeto);
     }
 
     @DeleteMapping("/{id}")
-    public void deleteProjeto(@PathVariable Long id) {
-        projetoService.deleteProjeto(id);
+    public CompletableFuture<Projeto> deleteProjetoAsync(@PathVariable Long id) {
+        return projetoRepository.deleteByIdAsync(id);
     }
 }
