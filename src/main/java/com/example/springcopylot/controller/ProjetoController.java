@@ -5,36 +5,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.CompletableFuture;
+import com.example.springcopylot.unionofwork.IUnionofwork;
 
 @RestController
 @RequestMapping("/projetos")
 public class ProjetoController {
     @Autowired
-    private com.example.springcopylot.repository.IProjetoRepository projetoRepository;
+    private IUnionofwork unionofwork;
 
     @GetMapping
     public CompletableFuture<Iterable<Projeto>> getAllProjetosAsync() {
-        return projetoRepository.findAllAsync();
+        return unionofwork.GetProjetoRepository().findAllAsync();
     }
 
     @GetMapping("/{id}")
     public CompletableFuture<Projeto> getProjetoByIdAsync(@PathVariable Long id) {
-        return projetoRepository.findByIdAsync(id);
+        return unionofwork.GetProjetoRepository().findByIdAsync(id);
     }
 
     @PostMapping
     public CompletableFuture<Projeto> addProjetoAsync(@RequestBody Projeto projeto) {
-        return projetoRepository.saveAsync(projeto);
+        return unionofwork.GetProjetoRepository().saveAsync(projeto);
     }
 
     @PutMapping("/{id}")
     public CompletableFuture<Projeto> updateProjetoAsync(@PathVariable Long id, @RequestBody Projeto projeto) {
         projeto.setId(id);
-        return projetoRepository.saveAsync(projeto);
+        return unionofwork.GetProjetoRepository().saveAsync(projeto);
     }
 
     @DeleteMapping("/{id}")
     public CompletableFuture<Projeto> deleteProjetoAsync(@PathVariable Long id) {
-        return projetoRepository.deleteByIdAsync(id);
+        return unionofwork.GetProjetoRepository().deleteByIdAsync(id);
     }
 }
