@@ -1,7 +1,11 @@
 package com.example.springcopylot.pagination;
 
-public class PagedList<T> implements List<T>{
+import java.util.ArrayList;
+import java.util.List;
+
+public class PagedList<T> extends ArrayList<T> {
     public int currentPage;
+
     public int getCurrentPage() {
         return currentPage;
     }
@@ -11,6 +15,7 @@ public class PagedList<T> implements List<T>{
     }
 
     public int totalPages;
+
     public int getTotalPages() {
         return totalPages;
     }
@@ -20,6 +25,7 @@ public class PagedList<T> implements List<T>{
     }
 
     public int pageSize;
+
     public int getPageSize() {
         return pageSize;
     }
@@ -38,28 +44,32 @@ public class PagedList<T> implements List<T>{
         this.totalCount = totalCount;
     }
 
-    public bool HasPrevious() {
-        return CurrentPage > 1;
+    public boolean HasPrevious() {
+        return currentPage > 1;
     }
 
-    public bool HasNext() {
+    public boolean HasNext() {
 
-        return CurrentPage < TotalPages;
+        return currentPage < totalPages;
     }
 
     public PagedList(List<T> items, int count, int pageNumber, int pageSize) {
         setTotalCount(count);
         setPageSize(pageSize);
         setCurrentPage(pageNumber);
-        setTotalPages((int) Math.Ceiling(count / (double) pageSize));
+        setTotalPages((int) Math.ceil(count / (double) pageSize));
 
-        AddRange(items);
+        addAll(items);
     }
 
-    public static PagedList<T> ToPagedList(IQueryable<T> source, int pageNumber, int pageSize) {
-        var count = source.Count();
-        var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+    public static <T> PagedList<T> toPagedList(Iterable<T> source, int pageNumber, int pageSize) {
+        var count = ((List<T>) source).size();
+        var items = ((List<T>) source).stream()
+                .skip((pageNumber - 1) * pageSize)
+                .limit(pageSize)
+                .toList();
 
         return new PagedList<T>(items, count, pageNumber, pageSize);
     }
+
 }

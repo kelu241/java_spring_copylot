@@ -1,7 +1,7 @@
 package com.example.springcopylot.pagination;
 
 public abstract class QueryStringParameters {
-    private int maxPageSize = 50;
+    private final int maxPageSize = 50;
     private int pagedNumber = 1;
     private int _pageSize = maxPageSize;
 

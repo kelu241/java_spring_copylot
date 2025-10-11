@@ -5,11 +5,11 @@ spring:
     url: jdbc:sqlserver://localhost:1433;databaseName=projetos;encrypt=false;trustServerCertificate=false;createDatabaseIfNotExist=true
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
-    password: 'PentaquePariu24'
+    password: 'PutaquePariu24'
   jpa:
     hibernate:
       ddl-auto: update
-    show-sql: true;
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
