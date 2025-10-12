@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Predicate;
+
 import com.example.springcopylot.unionofwork.IUnionofwork;
 
 @RestController
@@ -46,4 +48,25 @@ public class ProjetoController {
             @RequestParam int pageSize) {
         return unionofwork.GetProjetoRepository().paginateAsync(pageNumber, pageSize);
     }
+
+ @GetMapping("/filter")
+public CompletableFuture<Iterable<Projeto>> searchProjetosAsync(
+        @RequestParam String campo,           // nome, descricao, etc.
+        @RequestParam String valor) {         // texto a buscar
+    
+    // Criar predicate baseado nos parâmetros
+    Predicate<Projeto> predicate = projeto -> {
+        switch (campo.toLowerCase()) {
+            case "nome":
+                return projeto.getNome().toLowerCase().contains(valor.toLowerCase());
+            case "idade":
+                return String.valueOf(projeto.getIdade()).equals(valor);
+            default:
+                return projeto.getNome().toLowerCase().contains(valor.toLowerCase());
+        }
+    };
+    
+    return unionofwork.GetProjetoRepository().searchAsync(predicate);
+}
+    
 }

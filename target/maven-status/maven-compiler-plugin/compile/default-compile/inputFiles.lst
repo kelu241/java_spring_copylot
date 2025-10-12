@@ -1,4 +1,5 @@
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/pagination/QueryStringParameters.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/filter/Filter.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/IProjetoRepository.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/ProjetoJpaRepository.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/IGerericRepository.java
@@ -11,4 +12,5 @@
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/model/Projeto.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/service/ProjetoService.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/config/ServiceConfig.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/filter/IFilter.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/ProjetoRepository.java
