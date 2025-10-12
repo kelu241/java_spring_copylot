@@ -3,8 +3,11 @@ package com.example.springcopylot.pagination;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PagedList<T> extends ArrayList<T> {
+public class PagedList<T> extends ArrayList<T> implements IPagedList<T> {
     public int currentPage;
+    public int totalPages;
+    public int pageSize;
+    public int totalCount;
 
     public int getCurrentPage() {
         return currentPage;
@@ -14,8 +17,6 @@ public class PagedList<T> extends ArrayList<T> {
         this.currentPage = currentPage;
     }
 
-    public int totalPages;
-
     public int getTotalPages() {
         return totalPages;
     }
@@ -24,8 +25,6 @@ public class PagedList<T> extends ArrayList<T> {
         this.totalPages = totalPages;
     }
 
-    public int pageSize;
-
     public int getPageSize() {
         return pageSize;
     }
@@ -33,8 +32,6 @@ public class PagedList<T> extends ArrayList<T> {
     public void setPageSize(int pageSize) {
         this.pageSize = pageSize;
     }
-
-    public int totalCount;
 
     public int getTotalCount() {
         return totalCount;

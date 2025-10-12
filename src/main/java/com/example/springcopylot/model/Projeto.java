@@ -10,12 +10,16 @@ public class Projeto {
     private String nome;
     private int idade;
 
-    public Projeto() {}
+    public Projeto() {
+    }
 
-    public Projeto(String nome, int idade) {
+    public Projeto(Long id, String nome, int idade) {
+        this.id = id;
         this.nome = nome;
         this.idade = idade;
     }
+
+
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
