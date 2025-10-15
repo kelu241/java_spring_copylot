@@ -1,17 +1,21 @@
-// package com.example.springcopylot.config;
+package com.example.springcopylot.config;
 
+import com.example.springcopylot.logging.HttpRequestLoggingInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-// import com.example.springcopylot.repository.IProjetoRepository;
-// import com.example.springcopylot.repository.ProjetoRepository;
-
-// import org.springframework.context.annotation.Bean;
-// import org.springframework.context.annotation.Configuration;
-
-// @Configuration
-// public class ServiceConfig {
+@Configuration
+public class ServiceConfig implements WebMvcConfigurer {
     
-//     @Bean
-//     public IProjetoRepository projetoService(ProjetoRepository projetoRepository) {
-//         return new ProjetoRepository();
-//     }
-// }
+    @Autowired
+    private HttpRequestLoggingInterceptor httpRequestLoggingInterceptor;
+    
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(httpRequestLoggingInterceptor)
+                .addPathPatterns("/api/**") // Aplica apenas às rotas da API
+                .excludePathPatterns("/api/health", "/api/actuator/**"); // Exclui endpoints de health check
+    }
+}

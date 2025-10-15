@@ -3,6 +3,9 @@ package com.example.springcopylot.controller;
 import com.example.springcopylot.model.Projeto;
 import com.example.springcopylot.pagination.PagedList;
 import com.example.springcopylot.MetodoExtensao.ProjetoExtensao;
+import com.example.springcopylot.logging.LogExecution;
+import com.example.springcopylot.logging.CustomLogger;
+
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,16 +19,25 @@ import com.example.springcopylot.unionofwork.IUnionofwork;
 
 @RestController
 @RequestMapping("/projetos")
+@LogExecution(includeParameters = true, includeResult = false) // Log automático para toda a classe
 public class ProjetoController {
     @Autowired
     private IUnionofwork unionofwork;
 
     @GetMapping
+    @LogExecution(includeParameters = false, includeResult = true) // Log específico para este método
     public CompletableFuture<ResponseEntity<Iterable<ProjetoDTO>>> getAllProjetosAsync() {
+        CustomLogger.logInfo("Iniciando busca de todos os projetos");
+        
         var projetosFuture = unionofwork.GetProjetoRepository().findAllAsync()
-                .thenApply(projetos -> StreamSupport.stream(projetos.spliterator(), false)
-                        .map(projeto -> ProjetoExtensao.ProjetoToDTO(projeto))
-                        .collect(Collectors.toList()));
+                .thenApply(projetos -> {
+                    long count = StreamSupport.stream(projetos.spliterator(), false).count();
+                    CustomLogger.logInfo("Convertendo %d projetos para DTO", count);
+                    
+                    return StreamSupport.stream(projetos.spliterator(), false)
+                            .map(projeto -> ProjetoExtensao.ProjetoToDTO(projeto))
+                            .collect(Collectors.toList());
+                });
         return projetosFuture.thenApply(ResponseEntity::ok);
     }
 

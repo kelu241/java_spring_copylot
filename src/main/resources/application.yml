@@ -17,7 +17,21 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+
 server:
   port: 8080
   servlet:
-    context-path: /api    
+    context-path: /api
+
+# Configurações de logging personalizadas
+logging:
+  level:
+    com.example.springcopylot: INFO
+    org.springframework.web: DEBUG
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{requestId:-}] %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{requestId:-}] %logger{36} - %msg%n"
+  file:
+    name: logs/application.log    
