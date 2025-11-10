@@ -17,18 +17,18 @@ import java.util.UUID;
  */
 @Component
 public class CustomLogger {
-    
+
     private static final Logger logger = LoggerFactory.getLogger(CustomLogger.class);
     private static final ObjectMapper objectMapper = new ObjectMapper();
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS");
-    
+
     /**
      * Gera um ID único para rastreamento de requisições
      */
     public static String generateRequestId() {
         return UUID.randomUUID().toString().substring(0, 8);
     }
-    
+
     /**
      * Define o contexto da requisição no MDC
      */
@@ -38,42 +38,42 @@ public class CustomLogger {
         MDC.put("operation", operation);
         MDC.put("timestamp", LocalDateTime.now().format(formatter));
     }
-    
+
     /**
      * Limpa o contexto do MDC
      */
     public static void clearContext() {
         MDC.clear();
     }
-    
+
     /**
      * Log estruturado de informação
      */
     public static void logInfo(String message, Object... params) {
         logger.info(buildStructuredMessage("INFO", message, null, params));
     }
-    
+
     /**
      * Log estruturado de debug
      */
     public static void logDebug(String message, Object... params) {
         logger.debug(buildStructuredMessage("DEBUG", message, null, params));
     }
-    
+
     /**
      * Log estruturado de warning
      */
     public static void logWarn(String message, Object... params) {
         logger.warn(buildStructuredMessage("WARN", message, null, params));
     }
-    
+
     /**
      * Log estruturado de erro
      */
     public static void logError(String message, Throwable throwable, Object... params) {
         logger.error(buildStructuredMessage("ERROR", message, throwable, params));
     }
-    
+
     /**
      * Log de entrada de método
      */
@@ -83,10 +83,10 @@ public class CustomLogger {
         logData.put("class", className);
         logData.put("method", methodName);
         logData.put("parameters", parameters);
-        
+
         logger.info(toJson(logData));
     }
-    
+
     /**
      * Log de saída de método
      */
@@ -97,14 +97,15 @@ public class CustomLogger {
         logData.put("method", methodName);
         logData.put("result", result);
         logData.put("executionTimeMs", executionTime);
-        
+
         logger.info(toJson(logData));
     }
-    
+
     /**
      * Log de exceção em método
      */
-    public static void logMethodException(String className, String methodName, Throwable throwable, long executionTime) {
+    public static void logMethodException(String className, String methodName, Throwable throwable,
+            long executionTime) {
         Map<String, Object> logData = new HashMap<>();
         logData.put("event", "METHOD_EXCEPTION");
         logData.put("class", className);
@@ -112,10 +113,10 @@ public class CustomLogger {
         logData.put("exception", throwable.getClass().getSimpleName());
         logData.put("message", throwable.getMessage());
         logData.put("executionTimeMs", executionTime);
-        
+
         logger.error(toJson(logData), throwable);
     }
-    
+
     /**
      * Log de requisição HTTP
      */
@@ -126,10 +127,10 @@ public class CustomLogger {
         logData.put("uri", uri);
         logData.put("userAgent", userAgent);
         logData.put("remoteAddr", remoteAddr);
-        
+
         logger.info(toJson(logData));
     }
-    
+
     /**
      * Log de resposta HTTP
      */
@@ -138,10 +139,10 @@ public class CustomLogger {
         logData.put("event", "HTTP_RESPONSE");
         logData.put("statusCode", status);
         logData.put("executionTimeMs", executionTime);
-        
+
         logger.info(toJson(logData));
     }
-    
+
     /**
      * Constrói mensagem estruturada
      */
@@ -150,31 +151,31 @@ public class CustomLogger {
         logData.put("level", level);
         logData.put("message", String.format(message, params));
         logData.put("timestamp", LocalDateTime.now().format(formatter));
-        
+
         if (throwable != null) {
             logData.put("exception", throwable.getClass().getSimpleName());
             logData.put("exceptionMessage", throwable.getMessage());
         }
-        
+
         // Adiciona contexto do MDC se disponível
         String requestId = MDC.get("requestId");
         if (requestId != null) {
             logData.put("requestId", requestId);
         }
-        
+
         String userId = MDC.get("userId");
         if (userId != null) {
             logData.put("userId", userId);
         }
-        
+
         String operation = MDC.get("operation");
         if (operation != null) {
             logData.put("operation", operation);
         }
-        
+
         return toJson(logData);
     }
-    
+
     /**
      * Converte objeto para JSON
      */
@@ -184,5 +185,10 @@ public class CustomLogger {
         } catch (Exception e) {
             return "{\"error\":\"Failed to serialize log message\",\"original\":\"" + obj.toString() + "\"}";
         }
+    }
+
+    public static void logError(String string, String message) {
+        // TODO Auto-generated method stub
+        logger.error(buildStructuredMessage("ERROR", String.format(string, message), null));
     }
 }

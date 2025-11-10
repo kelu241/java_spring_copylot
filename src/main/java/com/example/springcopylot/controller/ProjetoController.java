@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.prepost.PreAuthorize;
 import com.example.springcopylot.DTO.ProjetoDTO;
 import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
@@ -20,6 +21,7 @@ import com.example.springcopylot.unionofwork.IUnionofwork;
 @RestController
 @RequestMapping("/projetos")
 @LogExecution(includeParameters = true, includeResult = false) // Log automático para toda a classe
+@PreAuthorize("hasRole('USER')")
 public class ProjetoController {
     @Autowired
     private IUnionofwork unionofwork;
@@ -37,7 +39,10 @@ public class ProjetoController {
                     return StreamSupport.stream(projetos.spliterator(), false)
                             .map(projeto -> ProjetoExtensao.ProjetoToDTO(projeto))
                             .collect(Collectors.toList());
-                });
+                }).exceptionally(ex -> {
+                    CustomLogger.logError("Erro ao buscar projetos: %s", ex.getMessage());
+                    return null;
+                }); 
         return projetosFuture.thenApply(ResponseEntity::ok);
     }
 

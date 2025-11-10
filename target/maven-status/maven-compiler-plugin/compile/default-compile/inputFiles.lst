@@ -1,6 +1,9 @@
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/config/SecurityConfig.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/DTO/ProjetoDTO.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/MetodoExtensao/ProjetoExtensao.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/model/Usuario.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/logging/LogLevel.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/controller/UsuarioController.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/ProjetoJpaRepository.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/IGerericRepository.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/SpringCopylotApplication.java
@@ -8,6 +11,7 @@
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/logging/CustomLogger.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/unionofwork/IUnionofwork.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/pagination/IPagedList.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/security/JwtAuthenticationFilter.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/controller/LoggingController.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/controller/ProjetoController.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/logging/LogExecution.java
@@ -20,8 +24,10 @@
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/pagination/QueryStringParameters.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/filter/Filter.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/IProjetoRepository.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/UsuarioRepository.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/unionofwork/Unionofwork.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/logging/LoggingAspect.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/config/LoggingConfig.java
+/home/kelu/spring_copylot/src/main/java/com/example/springcopylot/security/JwtUtil.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/service/ProjetoService.java
 /home/kelu/spring_copylot/src/main/java/com/example/springcopylot/repository/ProjetoRepository.java
