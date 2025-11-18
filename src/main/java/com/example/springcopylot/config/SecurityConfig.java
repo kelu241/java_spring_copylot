@@ -1,7 +1,6 @@
 package com.example.springcopylot.config;
 
 import com.example.springcopylot.security.JwtAuthenticationFilter;
-import jakarta.servlet.DispatcherType;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

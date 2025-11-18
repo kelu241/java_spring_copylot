@@ -6,6 +6,10 @@ spring:
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
     username: sa
     password: 'PutaquePariu24'
+    hikari:
+      maximum-pool-size: 1
+      minimum-idle: 0
+      connection-timeout: 20000
   jpa:
     hibernate:
       ddl-auto: update
@@ -43,4 +47,4 @@ logging:
     console: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{requestId:-}] %logger{36} - %msg%n"
     file: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level [%X{requestId:-}] %logger{36} - %msg%n"
   file:
-    name: logs/application.log    
+    name: logs/application.log

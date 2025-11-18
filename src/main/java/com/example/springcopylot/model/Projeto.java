@@ -1,22 +1,83 @@
 package com.example.springcopylot.model;
 
+import java.sql.Date;
+import java.math.BigDecimal;
+
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "projetos_java")
 public class Projeto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(name = "nome", length = 100, nullable = false)
     private String nome;
-    private int idade;
+    
+    @Column(name = "descricao", columnDefinition = "TEXT")
+    private String descricao;
+    
+    @Column(name = "orcamento", precision = 10, scale = 2, nullable = false)
+    private BigDecimal orcamento;
+    @Column(name = "status", nullable = false)
+    private Boolean status;
+    @Column(name = "data_inicio", nullable = false)
+    private Date dataInicio;
+    @Column(name = "data_fim", nullable = false)
+    private Date dataFim;
 
-    public Projeto() {
+    public String getDescricao() {
+        return descricao;
     }
 
-    public Projeto(Long id, String nome, int idade) {
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public BigDecimal getOrcamento() {
+        return orcamento;
+    }
+
+    public void setOrcamento(BigDecimal orcamento) {
+        this.orcamento = orcamento;
+    }
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
+
+    public Date getDataInicio() {
+        return dataInicio;
+    }
+
+    public void setDataInicio(Date dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public Date getDataFim() {
+        return dataFim;
+    }
+
+    public void setDataFim(Date dataFim) {
+        this.dataFim = dataFim;
+    }
+
+    public Projeto(Long long1, String string, int i) {
+    }
+
+    public Projeto(Long id, String nome, String descricao, BigDecimal orcamento, Boolean status, Date dataInicio, Date dataFim) {
         this.id = id;
         this.nome = nome;
-        this.idade = idade;
+        this.descricao = descricao;
+        this.orcamento = orcamento;
+        this.status = status;
+        this.dataInicio = dataInicio;       
+        this.dataFim = dataFim;
+
     }
 
 
@@ -25,6 +86,4 @@ public class Projeto {
     public void setId(Long id) { this.id = id; }
     public String getNome() { return nome; }
     public void setNome(String nome) { this.nome = nome; }
-    public int getIdade() { return idade; }
-    public void setIdade(int idade) { this.idade = idade; }
 }

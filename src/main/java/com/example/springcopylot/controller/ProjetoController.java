@@ -117,8 +117,18 @@ public class ProjetoController {
             switch (campo.toLowerCase()) {
                 case "nome":
                     return projeto.getNome().toLowerCase().contains(valor.toLowerCase());
-                case "idade":
-                    return String.valueOf(projeto.getIdade()).equals(valor);
+                case "orcamento":
+                    return String.valueOf(projeto.getOrcamento()).equals(valor);
+                case "descricao":
+                    return projeto.getDescricao().toLowerCase().contains(valor.toLowerCase());
+                case "status":
+                    return String.valueOf(projeto.getStatus()).equalsIgnoreCase(valor);
+                case "datainicio":
+                    return projeto.getDataInicio() != null && projeto.getDataInicio().toString().equals(valor);
+                case "datafim":
+                    return projeto.getDataFim() != null && projeto.getDataFim().toString().equals(valor);
+                case "id":
+                    return String.valueOf(projeto.getId()).equals(valor);   
                 default:
                     return projeto.getNome().toLowerCase().contains(valor.toLowerCase());
             }
